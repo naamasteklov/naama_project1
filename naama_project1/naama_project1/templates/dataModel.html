@@ -1,0 +1,39 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>{{ title }}.</h1>
+<h3>{{ message }}</h3>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12" style="background-color: lightskyblue">
+            <p> I decide to use two different dataset to examine this topic and help users to undersend the phenomena</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3" style="background-color: lightcoral">
+            <img src="" alt="No Image"/>
+        </div>
+        <div class="col-lg-9" style="background-color: coral">
+            <img src="https://i.guim.co.uk/img/static/sys-images/Guardian/About/General/2010/11/19/1290191411132/An-alien-from-Mars-Attack-006.jpg?width=300&quality=85&auto=format&fit=max&s=c9c81e5d04dbd4bf28e9bd31b2a23947" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4" style="background-color: lightgoldenrodyellow">
+            <p>UFOVisits</p>
+        </div>
+        <div class="col-lg-4" style="background-color: lightgreen">
+            <p>This dataset holds all the rercords of aliens visitin earth</p>
+        </div>
+        <div class="col-lg-4" style="background-color: green">
+            <p><a href="{{ url_for('DataSet1') }}">Go To DataSet Page</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

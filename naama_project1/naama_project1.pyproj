@@ -17,6 +17,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>naama_project1</Name>
     <RootNamespace>naama_project1</RootNamespace>
+    <InterpreterId>MSBuild|env3|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,19 +28,40 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="naama_project1\Model\Form.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="naama_project1\Model\LocalDatabaseRoutines.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="naama_project1\Model\QueryFormStructure.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="naama_project1\__init__.py" />
     <Compile Include="naama_project1\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="naama_project1\" />
+    <Folder Include="naama_project1\Model\" />
     <Folder Include="naama_project1\static\" />
     <Folder Include="naama_project1\static\content\" />
     <Folder Include="naama_project1\static\fonts\" />
+    <Folder Include="naama_project1\static\excel\" />
+    <Folder Include="naama_project1\static\Images\" />
+    <Folder Include="naama_project1\static\MyData\" />
     <Folder Include="naama_project1\static\scripts\" />
     <Folder Include="naama_project1\templates\" />
+    <Folder Include="naama_project1\Model\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="naama_project1\static\MyData\student-mat.csv" />
+    <Content Include="naama_project1\static\MyData\capitals.csv" />
+    <Content Include="naama_project1\static\MyData\users.csv" />
+    <Content Include="naama_project1\templates\dataModel.html" />
+    <Content Include="naama_project1\templates\home.html" />
+    <Content Include="naama_project1\templates\login.html" />
+    <Content Include="naama_project1\templates\register.html" />
     <Content Include="requirements.txt" />
     <Content Include="naama_project1\static\content\bootstrap.css" />
     <Content Include="naama_project1\static\content\bootstrap.min.css" />
@@ -67,6 +89,44 @@
     <Content Include="naama_project1\templates\contact.html" />
     <Content Include="naama_project1\templates\index.html" />
     <Content Include="naama_project1\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env1\">
+      <Id>env1</Id>
+      <Version>3.8</Version>
+      <Description>env1 (Python 3.8 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
+    <Interpreter Include="env2\">
+      <Id>env2</Id>
+      <Version>3.8</Version>
+      <Description>env2 (Python 3.8 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
+    <Interpreter Include="env3\">
+      <Id>env3</Id>
+      <Version>3.8</Version>
+      <Description>env3 (Python 3.8 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.8</Version>
+      <Description>env (Python 3.8 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
