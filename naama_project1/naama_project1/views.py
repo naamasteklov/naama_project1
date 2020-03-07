@@ -140,7 +140,6 @@ def register():
     return render_template(
         'register.html', 
         form=form, 
-        title='Register New User',
         year=datetime.now().year,
         repository_name='Pandas',
         )
@@ -163,7 +162,6 @@ def login():
     return render_template(
         'login.html', 
         form=form, 
-        title='Login to data analysis',
         year=datetime.now().year,
         repository_name='Pandas',
         )
@@ -183,18 +181,18 @@ def dataModel():
 
 @app.route('/DataSet1')
 def DataSet1():
-
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static\\Data\\capitals.csv'))
+    
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static\\MyData\\student-mat.csv'))
     raw_data_table = df.to_html(classes = 'table table-hover')
-
-
+   
     """Renders the contact page."""
     return render_template(
         'DataSet1.html',
-        title='This is Data Set 1 page',
+      
         raw_data_table = raw_data_table,
         year=datetime.now().year,
         message='In this page we will display the datasets we are going to use in order to answer ARE THERE UFOs'
+
     )
 
 

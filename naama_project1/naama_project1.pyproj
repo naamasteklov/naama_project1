@@ -55,10 +55,14 @@
     <Folder Include="naama_project1\Model\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="naama_project1\static\Images\num1.jpg" />
+    <Content Include="naama_project1\static\Images\school.jpg" />
     <Content Include="naama_project1\static\MyData\student-mat.csv" />
     <Content Include="naama_project1\static\MyData\capitals.csv" />
     <Content Include="naama_project1\static\MyData\users.csv" />
+    <Content Include="naama_project1\static\scripts\Naama.js" />
     <Content Include="naama_project1\templates\dataModel.html" />
+    <Content Include="naama_project1\templates\DataSet1.html" />
     <Content Include="naama_project1\templates\home.html" />
     <Content Include="naama_project1\templates\login.html" />
     <Content Include="naama_project1\templates\register.html" />

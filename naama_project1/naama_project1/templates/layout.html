@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <script src="/static/scripts/Naama.js"></script>
 </head>
 
 <body>
@@ -22,12 +23,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('register') }}">register</a></li>
-                    <li><a href="{{ url_for('login') }}">login</a></li>
                     <li><a href="{{ url_for('home') }}">home</a></li>
                     <li><a href="{{ url_for('dataModel') }}">dataModel</a></li>
                     <li><a href="{{ url_for('about') }}">about</a></li>
                     <li><a href="{{ url_for('contact') }}">contact</a></li>
+                    <li><a href="{{ url_for('register') }}">register</a></li>
+                    <li><a href="{{ url_for('login') }}">login</a></li>
                 </ul>
             </div>
         </div>
