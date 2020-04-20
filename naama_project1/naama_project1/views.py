@@ -18,6 +18,7 @@ from wtforms.validators import DataRequired
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from flask_wtf import FlaskForm
 
 import json 
 import requests
@@ -29,13 +30,27 @@ from os import path
 
 from flask   import Flask, render_template, flash, request
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
-from wtforms import TextField, TextAreaField, SubmitField, SelectField, DateField
+from wtforms import TextField, TextAreaField, SubmitField, SelectField, DateField, RadioField
 from wtforms import ValidationError
 
+from flask_bootstrap import Bootstrap
+bootstrap = Bootstrap(app)
+
+import base64
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 from naama_project1.Models.QueryFormStructure import QueryFormStructure 
-from naama_project1.Models.QueryFormStructure import LoginFormStructure 
 from naama_project1.Models.QueryFormStructure import UserRegistrationFormStructure 
+from naama_project1.Models.QueryFormStructure import LoginFormStructure 
+#from naama_project1.Models.QueryFormStructure import Alcoholform 
+
+class Alcoholform(FlaskForm):
+    famsize = RadioField('Family size greater than 3?' , validators = [DataRequired] , choices=[('GT3', 'GT3'), ('LE3', 'LE3')])
+    sex = RadioField('Choose gender:' , validators = [DataRequired] , choices=[('F', 'F'), ('M', 'M')])
+    activities = RadioField('Activities?' , validators = [DataRequired] , choices=[('yes', 'yes'), ('no', 'no')])
+    romantic = RadioField('In a romantic relationship?' , validators = [DataRequired] , choices=[('yes', 'yes'), ('no', 'no')])
+    submit = SubmitField('submit')
 
 ###from DemoFormProject.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
 
@@ -84,40 +99,43 @@ def Album():
     )
 
 
-@app.route('/Query', methods=['GET', 'POST'])
-def Query():
+@app.route('/query', methods=['GET', 'POST'])
+def query():
 
-    Name = None
-    Country = ''
-    capital = ''
-    df = pd.read_csv(path.join(path.dirname(__file__), 'static\\Data\\capitals.csv'))
-    df = df.set_index('Country')
+ 
+    df = pd.read_csv(path.join(path.dirname(__file__), 'static\\MyData\\student-mat.csv'))
+    
 
-    raw_data_table = df.to_html(classes = 'table table-hover')
-
-    form = QueryFormStructure(request.form)
-     
+    form = Alcoholform()
+    chart = 'https://www.kipa.co.il/userFiles/1_0b5bfd0ec6fb3616911f87a366a10e97.jpg'
     if (request.method == 'POST' ):
-        name = form.name.data
-        Country = name
-        if (name in df.index):
-            capital = df.loc[name,'Capital']
-            raw_data_table = ""
-        else:
-            capital = name + ', no such country'
-        form.name.data = ''
+        famsize = form.famsize.data
+        sex = form.sex.data
+        romantic = form.romantic.data
+        activities = form.activities.data
+        df = df.drop(['school', 'Fedu', 'Medu', 'reason','guardian','traveltime', 'studytime', 'paid','G1', 'G2','G3', 'address','Pstatus','Mjob','Fjob','failures','schoolsup','famsup','nursery','higher','internet','famrel','freetime','goout','health','absences','Dalc'], 1)
+   
+        df = df.loc[df["famsize"]==famsize]
+        df = df.loc[df["sex"]==sex]
+        df = df.loc[df["activities"]==activities]
+        df = df.loc[df["romantic"]==romantic]
+        df = df.groupby('age').mean()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        df.plot(kind = 'bar', ax=ax)
+        chart = plot_to_img(fig)
 
 
 
-    return render_template('Query.html', 
+
+    return render_template('query.html', 
             form = form, 
-            name = capital, 
-            Country = Country,
-            raw_data_table = raw_data_table,
             title='Query by the user',
-            year=datetime.now().year,
-            message='This page will use the web forms to get user input'
+            chart = chart
+           
         )
+
+
 
 # -------------------------------------------------------
 # Register new user page
@@ -140,6 +158,7 @@ def register():
     return render_template(
         'register.html', 
         form=form, 
+        title='Register New User',
         year=datetime.now().year,
         repository_name='Pandas',
         )
@@ -162,6 +181,7 @@ def login():
     return render_template(
         'login.html', 
         form=form, 
+        title='Login to data analysis',
         year=datetime.now().year,
         repository_name='Pandas',
         )
@@ -194,5 +214,11 @@ def DataSet1():
         message='In this page we will display the datasets we are going to use in order to answer ARE THERE UFOs'
 
     )
+def plot_to_img(fig):
+    pngImage = io.BytesIO()
+    FigureCanvas(fig).print_png(pngImage)
+    pngImageB64String = "data:image/png;base64,"
+    pngImageB64String += base64.b64encode(pngImage.getvalue()).decode('utf8')
+    return pngImageB64String
 
 

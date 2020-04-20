@@ -2,140 +2,147 @@
 
 {% block content %}
 
-<h2>{{ title }}</h2>
-<style>
-    h1 {
-        text-align: center;
-    }
 
-    p {
-        text-align: center;
-        direction: rtl;
-    }
-</style>
-<h1>My <span style="color:darkblue">register</span> page</h1>
+
+
+    <h2>{{ title }}</h2>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            direction: rtl;
+        }
+    </style>
+    <h1>My <span style="color:darkblue">register</span> page</h1>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for message in messages %}
-<h3>{{ message[1] }}</h3>
-<br />
+    <h3>{{ message[1] }}</h3>
+    <br />
     {% endfor %}
     {% endif %}
     {% endwith %}
 
-<br />
-<br />
-<br />
+    <br />
+    <br />
+    <br />
 
-<form method=post>
-    {{ form.csrf }}
-    {{ form.csrf_token }}
-    <table>
-        <tr>
-            <td>
-                {{ form.FirstName.label }}
-            </td>
-            <td>
-                {{ form.FirstName }}
-            </td>
-            <td>
-                {% if form.FirstName.errors %}
-                <ul class="text-danger">{% for error in form.FirstName.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.LastName.label }}
-            </td>
-            <td>
-                {{ form.LastName }}
-            </td>
-            <td>
-                {% if form.LastName.errors %}
-                <ul class="text-danger">{% for error in form.LastName.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.PhoneNum.label }}
-            </td>
-            <td>
-                {{ form.PhoneNum }}
-            </td>
-            <td>
-                {% if form.PhoneNum.errors %}
-                <ul class="text-danger">{% for error in form.PhoneNum.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.EmailAddr.label }}
-            </td>
-            <td>
-                {{ form.EmailAddr }}
-            </td>
-            <td>
-                {% if form.EmailAddr.errors %}
-                <ul class="text-danger">{% for error in form.EmailAddr.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.username.label }}
-            </td>
-            <td>
-                {{ form.username }}
-            </td>
-            <td>
-                {% if form.username.errors %}
-                <ul class="text-danger">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.password.label }}
-            </td>
-            <td>
-                {{ form.password }}
-            </td>
-            <td>
-                {% if form.password.errors %}
-                <ul class="text-danger">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <div class="input submit">
-                    <input type="submit" value="Register">
-                </div>
-            <td>
-            <td></td>
-        </tr>
-    </table>
-</form>
+    <form method=post>
+        {{ form.csrf }}
+        {{ form.csrf_token }}
+        <table>
+            <tr>
+                <td>
+                    {{ form.FirstName.label }}
+                </td>
+                <td>
+                    {{ form.FirstName }}
+                </td>
+                <td>
+                    {% if form.FirstName.errors %}
+                    <ul class="text-danger">{% for error in form.FirstName.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.LastName.label }}
+                </td>
+                <td>
+                    {{ form.LastName }}
+                </td>
+                <td>
+                    {% if form.LastName.errors %}
+                    <ul class="text-danger">{% for error in form.LastName.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
 
-<style>
-    td, tr, table {
-        font-size: 22px
-    }
+            <tr>
+                <td>
+                    {{ form.PhoneNum.label }}
+                </td>
+                <td>
+                    {{ form.PhoneNum }}
+                </td>
+                <td>
+                    {% if form.PhoneNum.errors %}
+                    <ul class="text-danger">{% for error in form.PhoneNum.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
 
-    h2 {
-        position: relative;
-        left: 450px;
-    }
-</style>
+                <td>
+                    {{ form.EmailAddr.label }}
+                </td>
+                <td>
+                    {{ form.EmailAddr }}
+                </td>
+                <td>
+                    {% if form.EmailAddr.errors %}
+                    <ul class="text-danger">{% for error in form.EmailAddr.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.username.label }}
+                </td>
+                <td>
+                    {{ form.username }}
+                </td>
+                <td>
+                    {% if form.username.errors %}
+                    <ul class="text-danger">{% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form.password.label }}
+                </td>
+                <td>
+                    {{ form.password }}
+                </td>
+                <td>
+                    {% if form.password.errors %}
+                    <ul class="text-danger">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="input submit">
+                        <input type="submit" value="Register">
+                    </div>
+                <td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+
+    <style>
+        td, tr, table {
+            font-size: 22px
+        }
+
+        h2 {
+            position: relative;
+            left: 450px;
+        }
+    </style>
 
 
-<a href="{{ url_for('home') }}">
-    <img border="0" src="data:image/png;base64,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" width="100" height="100">
-</a>
+    <a href="{{ url_for('home') }}">
+        <img border="0" src="data:image/png;base64,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" width="100" height="100">
+    </a>
 
     {% endblock %}
+
+

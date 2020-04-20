@@ -43,34 +43,21 @@
     }
 </style>
 
-<button type="button" class="collapsible">Open Collapsible</button>
-<div class="content">
-    <p>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div class="container">
+    <button type="button" class="btn btn-info" data-toggle="collapse"  data-target="#demo">Click Me</button>
+    <div id="demo" class="collapse">
         {{ raw_data_table | safe}}
-
-    </p>
+    </div>
 </div>
 
-<script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-</script>
 
 
 
-    {% endblock %}
 
 

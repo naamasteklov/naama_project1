@@ -55,6 +55,7 @@
     <Folder Include="naama_project1\Model\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="naama_project1\static\Images\alcohol.jpg" />
     <Content Include="naama_project1\static\Images\num1.jpg" />
     <Content Include="naama_project1\static\Images\school.jpg" />
     <Content Include="naama_project1\static\MyData\student-mat.csv" />
@@ -65,6 +66,7 @@
     <Content Include="naama_project1\templates\DataSet1.html" />
     <Content Include="naama_project1\templates\home.html" />
     <Content Include="naama_project1\templates\login.html" />
+    <Content Include="naama_project1\templates\query.html" />
     <Content Include="naama_project1\templates\register.html" />
     <Content Include="requirements.txt" />
     <Content Include="naama_project1\static\content\bootstrap.css" />
