@@ -43,7 +43,6 @@ from matplotlib.figure import Figure
 from naama_project1.Models.QueryFormStructure import QueryFormStructure 
 from naama_project1.Models.QueryFormStructure import UserRegistrationFormStructure 
 from naama_project1.Models.QueryFormStructure import LoginFormStructure 
-#from naama_project1.Models.QueryFormStructure import Alcoholform 
 
 class Alcoholform(FlaskForm):
     famsize = RadioField('Family size greater than 3?' , validators = [DataRequired] , choices=[('GT3', 'GT3'), ('LE3', 'LE3')])
@@ -52,11 +51,11 @@ class Alcoholform(FlaskForm):
     romantic = RadioField('In a romantic relationship?' , validators = [DataRequired] , choices=[('yes', 'yes'), ('no', 'no')])
     submit = SubmitField('submit')
 
-###from DemoFormProject.Models.LocalDatabaseRoutines import IsUserExist, IsLoginGood, AddNewUser 
 
 db_Functions = create_LocalDatabaseServiceRoutines() 
-
-
+#-----------------------------------
+# Landing page - home page - תמונות עם קישורים
+#-----------------------------------
 @app.route('/')
 @app.route('/home')
 def home():
@@ -67,6 +66,9 @@ def home():
         year=datetime.now().year,
     )
 
+#-----------------------------------
+# contact page - דף קשר עם הפרטים שלי
+#-----------------------------------
 @app.route('/contact')
 def contact():
     """Renders the contact page."""
@@ -76,7 +78,9 @@ def contact():
         year=datetime.now().year,
         message='Your contact page.'
     )
-
+#-----------------------------------
+# about page - מידע על הנושא
+#-----------------------------------
 @app.route('/about')
 def about():
     """Renders the about page."""
@@ -88,31 +92,23 @@ def about():
     )
 
 
-@app.route('/Album')
-def Album():
-    """Renders the about page."""
-    return render_template(
-        'PictureAlbum.html',
-        title='Pictures',
-        year=datetime.now().year,
-        message='Welcome to my picture album'
-    )
-
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
 
- 
+    #קורא את הטבלה 
     df = pd.read_csv(path.join(path.dirname(__file__), 'static\\MyData\\student-mat.csv'))
     
-
+    #משתמש בקלאס שרשמתי למעלה 
     form = Alcoholform()
+    #תמונה שתופיע בעמוד
     chart = 'https://www.kipa.co.il/userFiles/1_0b5bfd0ec6fb3616911f87a366a10e97.jpg'
     if (request.method == 'POST' ):
         famsize = form.famsize.data
         sex = form.sex.data
         romantic = form.romantic.data
         activities = form.activities.data
+        #מוציא את הדברים שלא חשובים בטבלה
         df = df.drop(['school', 'Fedu', 'Medu', 'reason','guardian','traveltime', 'studytime', 'paid','G1', 'G2','G3', 'address','Pstatus','Mjob','Fjob','failures','schoolsup','famsup','nursery','higher','internet','famrel','freetime','goout','health','absences','Dalc'], 1)
    
         df = df.loc[df["famsize"]==famsize]
@@ -122,6 +118,7 @@ def query():
         df = df.groupby('age').mean()
         fig = plt.figure()
         ax = fig.add_subplot(111)
+        #גרף
         df.plot(kind = 'bar', ax=ax)
         chart = plot_to_img(fig)
 
@@ -135,10 +132,10 @@ def query():
            
         )
 
-
-
 # -------------------------------------------------------
 # Register new user page
+# This function will get user details, will check if the user already exists
+# and if not, it will save the details in the users data base
 # -------------------------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -174,6 +171,8 @@ def login():
     if (request.method == 'POST' and form.validate()):
         if (db_Functions.IsLoginGood(form.username.data, form.password.data)):
             flash('Login approved!')
+            return redirect('query')
+            
             #return redirect('<were to go if login is good!')
         else:
             flash('Error in - Username and/or password')
@@ -184,10 +183,12 @@ def login():
         title='Login to data analysis',
         year=datetime.now().year,
         repository_name='Pandas',
+
         )
 
-
-
+# -------------------------------------------------------
+# Data model description, used by the site
+# -------------------------------------------------------
 @app.route('/dataModel')
 def dataModel():
     """Renders the contact page."""
@@ -198,11 +199,16 @@ def dataModel():
         message='In this page we will display the datasets we are going to use in order to answer ARE THERE UFOs'
     )
 
-
+# -------------------------------------------------------
+# Data Set page - הטבלה 
+# -------------------------------------------------------
 @app.route('/DataSet1')
 def DataSet1():
     
     df = pd.read_csv(path.join(path.dirname(__file__), 'static\\MyData\\student-mat.csv'))
+    
+    df = df.drop(['school', 'Fedu', 'Medu', 'reason','guardian','traveltime', 'studytime', 'paid','G1', 'G2','G3', 'address','Pstatus','Mjob','Fjob','failures','schoolsup','famsup','nursery','higher','internet','famrel','freetime','goout','health','absences','Dalc'], 1)
+   
     raw_data_table = df.to_html(classes = 'table table-hover')
    
     """Renders the contact page."""

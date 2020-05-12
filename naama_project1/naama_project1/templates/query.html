@@ -1,8 +1,13 @@
-﻿{% extends "layout.html" %}
+﻿﻿{% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block content %}
+<style>
 
+    body {
+        background-image: url(data:image/jpeg;base64,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);
+    }
+</style>
 
 
 <hr />
@@ -11,14 +16,25 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-6">
-        <h1>My <span style="color:darkblue">query</span> page</h1>
-        <h4>Alcohol among teenagers</h4>
+        <h1><center>My <span style="color:darkblue">query</span> page</center></h1>
+        <h4><center>Alcohol among teenagers</center></h4>
     </div>
     <div class="col-md-4">
         <div class="col-md-4">
         </div>
     </div>
 </div>
+
+<br />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div class="container">
+    <div class="well">On this page, as soon as you click the Submit button, you will see a graph depicting the average amount of teenage drinking over the weekend for the criteria you select.</div>
+</div>
+
 
 <hr />
 <h4>
@@ -61,5 +77,10 @@
 
 
 <hr />
+<h4 style="font-family:courier;">walc = weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)</h4>
+
+<a href="{{ url_for('home') }}">
+    <img border="0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Felipe_icon_User.svg/250px-Felipe_icon_User.svg.png" width="60" height="60">
+</a>
 
     {% endblock %}

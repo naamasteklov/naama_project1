@@ -2,21 +2,15 @@
 
 {% block content %}
 
-<h2>{{title}}</h2>
-
-<style>
-    h1 {
-        text-align: center;
-    }
-
-    p {
-        text-align: center;
-        direction: rtl;
-    }
-</style>
-<h1>My <span style="color:darkblue">data set</span> page</h1>
 
 
+
+<h1><center>My <span style="color:darkblue">data set</span> page</center></h1>
+
+
+
+
+<!--כפתור שפותח טבלה והסבר על העמודות-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     .collapsible {
@@ -44,17 +38,47 @@
 </style>
 
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<div class="container">
-    <button type="button" class="btn btn-info" data-toggle="collapse"  data-target="#demo">Click Me</button>
-    <div id="demo" class="collapse">
-        {{ raw_data_table | safe}}
-    </div>
+<button type="button" class="collapsible">click here to open the dataset</button>
+<div class="content">
+    {{ raw_data_table | safe}}
+    <h4>
+        1. sex - student's sex (binary: 'F' - female or 'M' - male)
+        <br />
+        2. age - student's age (numeric: from 15 to 22)
+        <br />
+        3. famsize - family size (binary: 'LE3' - less or equal to 3 or 'GT3' - greater than 3)
+        <br />
+        4. activities - extra-curricular activities (binary: yes or no)
+        <br />
+        5. romantic - with a romantic relationship (binary: yes or no)
+        <br />
+        6. Walc - weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)
+    </h4>
 </div>
+
+
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
+
+
+
+
+    {% endblock %}
 
 
 
